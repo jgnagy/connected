@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Connected
+  # A generic implementation of an Edge
   class GenericConnection
     include Edge
 

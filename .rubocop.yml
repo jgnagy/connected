@@ -32,6 +32,13 @@ Metrics/BlockLength:
     - 'spec/**/*_spec.rb'
     - 'spec/spec_helper.rb'
 
+Metrics/ParameterLists:
+  Max: 6
+
+Naming/MethodParameterName:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Security/Eval:
   Exclude:
     - Gemfile

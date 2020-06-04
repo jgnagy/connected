@@ -50,6 +50,9 @@ module Connected
       nodes.map(&:name).join(separator)
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def self.all(from:, to:, include_closed: false, debug: false, suboptimal: false)
       paths = []
 
@@ -84,6 +87,9 @@ module Connected
       # Return the list of paths, sorted first by cost then by hops
       paths.sort_by { |p| [p.cost, p.hops] }
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
 
     def self.find(from:, to:, include_closed: false)
       all(from: from, to: to, include_closed: include_closed).first

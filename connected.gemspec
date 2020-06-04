@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.email         = ['jonathan.gnagy@gmail.com']
 
   spec.summary       = 'A shortest path first gem'
-  spec.description   = 'A Ruby object-oriented solver for directed and undirected graphs based loosely on Dijkstra\'s algorithm'
+  spec.description   = 'A Ruby object-oriented solver for directed and undirected ' \
+                       'graphs based loosely on Dijkstra\'s algorithm'
   spec.homepage      = 'https://github.com/jgnagy/connected'
 
   spec.license       = 'MIT'
