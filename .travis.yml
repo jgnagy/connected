@@ -1,6 +1,14 @@
----
 language: ruby
 cache: bundler
 rvm:
-  - 2.6.6
+- 2.6.6
 before_install: gem install bundler -v 2.1.4
+deploy:
+  provider: rubygems
+  api_key:
+    secure: nCpiK6ht0RMKBZa5nX3o1YXKbgL6+DdXQYjszMUrt1+i7edVLqg9Y6XOXfsY8r3zI9CiX0dbrq9w9uF7ELLBkPiV7bhzvshmkGMQuc5MvC/FvHTzizkeJj7L85Z8impkF+cQXFKyKOptlUOlud9SJQZXk86DEHYI3Rg1GJklZ6AAVZQ5ixz/TBUhrMJPGXZEaN+tErio17CVZ38xgp/CwkIsV3MhRMaruGOidIXPQXJCOtElD+BUOIZ9pU0yJxJlbTucCtcWyO1wa7B9HbxodEv7O/kDRj8+rWESSHg18T8otS7vVyDZYUeVbSNVULQM3epCDvwVQZiMyBphpNaNOf9p9SCH2i11L+HWomOEdcZNy+8BwRbIiU/vWgbm2QI3XQxnQxwg48eIR3xjwWcsGwZFIP9DGykuF7fP+IgrBJ3pPb1tORW8FwTB6adMaSdIYKRvt5D+mm3DUzrMDHHN6Nc3hGGQkNc9Tya2PvwBx/bdjPK/L9nYBhsTEao3DyfFLXDU1zGwuWcmQHjd6qStgD21AgbL8qvhLbAP5tVeYx6gKeONcHtoCLf6XP/UN5RyabBCVNBYymHQLobgAw/Ozthj+b0n5ke2CkIOyRB4pgk/nee4UChMikRscG5CHvj3pBrhFGWRHxUOMvHSGtOswuclDqs8v20Vm/BGrcJEsaU=
+  gem: connected
+  on:
+    tags: true
+    repo: jgnagy/connected
+  skip_cleanup: 'true'

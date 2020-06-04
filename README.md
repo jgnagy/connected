@@ -296,7 +296,7 @@ lonely.ips
 # => ["192.168.3.2"]
 
 # Bob has a direct connection to everyone
-bob.neighbors
+bob.neighbors.map(&:name)
 # => ["Alice", "Jim", "Joe", "Lonely"]
 
 # Alice can't _directly_ connect to Lonely
