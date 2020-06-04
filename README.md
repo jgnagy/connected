@@ -307,12 +307,12 @@ alice.neighbors.map(&:name)
 Now let's take a look at how routing looks:
 
 ```ruby
-# Even though Bob is directly connected to subnet 3 (where Lonley is),
+# Even though Bob is directly connected to subnet 3 (where Lonely is),
 # it is faster to get there through Jim
 Route.find(from: bob, to: lonely).to_s
 # => "Bob -> Jim -> Lonely"
 
-# Bob uses his direction connection to talk to Alice
+# Bob uses his direct connection to talk to Alice
 Route.find(from: bob, to: alice).to_s
 # => "Bob -> Alice"
 
