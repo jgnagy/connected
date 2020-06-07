@@ -2,7 +2,7 @@
 
 # Connected
 
-_Connected_ aims to be useful for overlaying and solving both directed and undirected graphs. The goal is to provide generic mixins to add a solver to real code, rather than an academic demonstration of how Dijkstra's algorithm works.
+_Connected_ aims to be useful for overlaying and searching both directed and undirected graphs. The goal is to provide generic mixins that add graph search capabilities to real code, rather than an academic demonstration of how Dijkstra's algorithm works.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ### Simple Uses
 
-For a simpler use-cases, the classes `Connected::GenericNode`, `Connected::GenericConnection`, and `Connected::Path` will suffice. These can either be subclassed or extended to wrap any real work. First, I'll just demonstrate how they work with an undirected graph (meaning a set of bidirectional connections):
+For simpler use-cases, the classes `Connected::GenericNode`, `Connected::GenericConnection`, and `Connected::Path` will suffice. These can either be subclassed or extended to wrap any real work. First, I'll just demonstrate how they work with an undirected graph (meaning a set of bidirectional connections):
 
 ```ruby
 require 'connected'
