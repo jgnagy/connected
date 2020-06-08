@@ -115,7 +115,33 @@ Path.find(from: node_a, to: node_d).to_s
 # => "a -> b -> d"
 ```
 
-All the above examples are based on connections created using `node.connects_to other_node`, which creates a bi-directional connection. For representing _directed_ graph, you can add `directed: true` to the method which causes it to only create the connection you explicitly described (meaning it won't create the connection back for you).
+All the above examples are based on connections created using `node.connects_to other_node`, which creates a bi-directional connection. For representing a _directed_ graph, you can add `directed: true` to the method which causes it to only create the connection you explicitly described (meaning it won't create the connection back for you). Under the hood, however, the graph itself is _always_ directed; this is just a convenient way to not automatically make both directions of a connection.
+
+Speaking of graphs, there is also a `Connected::GenericGraph` class that can be used either explicitly for slightly more complicated scenarios or it can be created dynamically as needed:
+
+```ruby
+node_a.subtree # returns a GenericGraph based on all nodes reachable from `node_a`
+# => #<Connected::GenericGraph:0x00007f...
+node_a.subtree.radius
+# => 4
+node_a.subtree.diameter
+# => 7
+node_a.subtree.adjacency_matrix
+# => Matrix[[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 0], [1, 1, 0, 1]]
+node_a.subtree.complete?
+# => false
+```
+
+This dynamic graph is also used on some methods directly on Edges:
+
+```ruby
+node_a.eccentricity
+# => 7
+node_a.neighborhood
+# => #<Connected::GenericGraph:0x00007fd35...
+node_a.neighborhood.vertices.map(&:name)
+# => ["b", "c"]
+```
 
 ### Overlaying on Other Objects
 
