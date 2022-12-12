@@ -28,7 +28,7 @@ module Connected
       vertices = neighbors
       vertices << self if closed
       n_edges = vertices.map(&:connections).flatten.uniq.select { |c| vertices.include?(c.to) }
-      GenericGraph.new(vertices: vertices, edges: n_edges)
+      GenericGraph.new(vertices:, edges: n_edges)
     end
 
     # Retrieves the Connection object responsible for connecting to a Node

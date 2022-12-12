@@ -46,7 +46,7 @@ module Connected
       nodes.last
     end
 
-    def to_s(separator = ' -> ')
+    def to_s(separator = " -> ")
       nodes.map(&:name).join(separator)
     end
 
@@ -62,10 +62,10 @@ module Connected
         this_path = path_queue.pop
         next unless this_path.open? || include_closed
 
-        puts "Walking from #{this_path.nodes.map(&:name).join(' to ')}" if debug
+        puts "Walking from #{this_path.nodes.map(&:name).join(" to ")}" if debug
 
         if this_path.to == to
-          puts "Found destination with #{this_path.nodes.map(&:name).join(' to ')}" if debug
+          puts "Found destination with #{this_path.nodes.map(&:name).join(" to ")}" if debug
           paths << this_path
         else
           highmetric = paths.max_by(&:cost)&.cost
@@ -78,7 +78,7 @@ module Connected
             if paths.empty? || new_path.cost <= highmetric || new_path.hops <= highops || suboptimal
               path_queue.unshift(new_path)
             elsif debug
-              puts "Skipping #{new_path.nodes.map(&:name).join(' to ')}"
+              puts "Skipping #{new_path.nodes.map(&:name).join(" to ")}"
             end
           end
         end
@@ -92,20 +92,20 @@ module Connected
     # rubocop:enable Metrics/PerceivedComplexity
 
     def self.find(from:, to:, include_closed: false)
-      all(from: from, to: to, include_closed: include_closed).first
+      all(from:, to:, include_closed:).first
     end
 
     private
 
     def validate_nodes(list)
       # Want to throw an exception if there are loops
-      raise 'Invalid Nodes list, duplicates found' unless list.size == list.uniq.size
+      raise "Invalid Nodes list, duplicates found" unless list.size == list.uniq.size
 
       list.each_with_index do |item, index|
         break if index == list.size - 1
 
         # Each node should connect to the next (no leaves except the end of the list)
-        raise 'Invalid Nodes list, broken chain' unless item.neighbors.include?(list[index + 1])
+        raise "Invalid Nodes list, broken chain" unless item.neighbors.include?(list[index + 1])
       end
 
       true

@@ -18,10 +18,10 @@ module Connected
       return true if neighbors.include?(other)
 
       connections << GenericConnection.new(
-        from: self, to: other, metric: metric, state: state.to_sym
+        from: self, to: other, metric:, state: state.to_sym
       )
 
-      other.connects_to(self, metric: metric, state: state) unless directed
+      other.connects_to(self, metric:, state:) unless directed
     end
 
     def disconnect_from(other, directed: false)
