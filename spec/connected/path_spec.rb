@@ -30,7 +30,6 @@ RSpec.describe Connected::Path do
   let(:expected_paths_with_closed) do
     [
       "a -> e -> f",
-      "a -> c -> f",
       "a -> f"
     ]
   end
@@ -106,18 +105,12 @@ RSpec.describe Connected::Path do
   end
 
   it "takes into account closed connections" do
-    expect(graph_with_closed_connection.size).to eq(
-      expected_paths_without_closed.size
-    )
     expect(graph_with_closed_connection.map(&:to_s)).to eq(
       expected_paths_without_closed
     )
   end
 
   it "allows including closed paths" do
-    expect(graph_with_allowed_closed_connection.size).to eq(
-      expected_paths_with_closed.size
-    )
     expect(graph_with_allowed_closed_connection.map(&:to_s)).to eq(
       expected_paths_with_closed
     )

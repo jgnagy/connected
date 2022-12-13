@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    connected (0.1.0)
+    connected (0.1.1)
+      matrix
 
 GEM
   remote: https://rubygems.org/
@@ -18,6 +19,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+    matrix (0.4.2)
     mini_portile2 (2.8.0)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)

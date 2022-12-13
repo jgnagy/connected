@@ -53,7 +53,15 @@ module Connected
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
-    def self.all(from:, to:, include_closed: false, debug: false, suboptimal: false)
+    def self.all(
+      from:,
+      to:,
+      include_closed: false,
+      debug: false,
+      suboptimal: false,
+      min_by: :cost,
+      cache: {}
+    )
       paths = []
 
       path_queue = from.neighbors.map { |n| new([from, n]) }
@@ -62,20 +70,25 @@ module Connected
         this_path = path_queue.pop
         next unless this_path.open? || include_closed
 
+        unless suboptimal
+          next if cache[this_path.to.name]&.<= this_path.send(min_by.to_sym)
+
+          cache[this_path.to.name] = this_path.send(min_by.to_sym)
+        end
+
         puts "Walking from #{this_path.nodes.map(&:name).join(" to ")}" if debug
 
         if this_path.to == to
           puts "Found destination with #{this_path.nodes.map(&:name).join(" to ")}" if debug
           paths << this_path
         else
-          highmetric = paths.max_by(&:cost)&.cost
-          highops = paths.max_by(&:hops)&.hops
+          maxmeasure = paths.map(&min_by.to_sym).max
 
           this_path.to.neighbors.each do |n|
             new_path = this_path.branch(n)
             next unless new_path
 
-            if paths.empty? || new_path.cost <= highmetric || new_path.hops <= highops || suboptimal
+            if paths.empty? || new_path.send(min_by.to_sym) <= maxmeasure || suboptimal
               path_queue.unshift(new_path)
             elsif debug
               puts "Skipping #{new_path.nodes.map(&:name).join(" to ")}"
@@ -85,14 +98,14 @@ module Connected
       end
 
       # Return the list of paths, sorted first by cost then by hops
-      paths.sort_by { |p| [p.cost, p.hops] }
+      paths.sort_by { |p| min_by == :cost ? p.cost : p.hops }
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
 
-    def self.find(from:, to:, include_closed: false)
-      all(from:, to:, include_closed:).first
+    def self.find(from:, to:, include_closed: false, min_by: :cost, cache: {})
+      all(from:, to:, include_closed:, min_by:, cache:).first
     end
 
     private
