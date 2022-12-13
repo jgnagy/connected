@@ -49,33 +49,33 @@ class Road
   private
 
   def validate_direction(dir)
-    raise 'Invalid direction' unless %i[n s e w].include?(dir)
+    raise "Invalid direction" unless %i[n s e w].include?(dir)
   end
 
   def validate_ends(a, b)
-    raise 'Source and destination can not be the same' if a == b
+    raise "Source and destination can not be the same" if a == b
 
     validate_end a
     validate_end b
   end
 
   def validate_end(object)
-    raise 'Invalid road ending' unless object.is_a?(Connected::Vertex)
+    raise "Invalid road ending" unless object.is_a?(Connected::Vertex)
   end
 
   def validate_length(num)
-    raise 'Invalid length' unless num.is_a?(Numeric) && num.positive?
+    raise "Invalid length" unless num.is_a?(Numeric) && num.positive?
   end
 
   def validate_name(name)
-    raise 'Invalid name' unless name.is_a?(String)
+    raise "Invalid name" unless name.is_a?(String)
   end
 
   def validate_speed(num)
-    raise 'Invalid speedlimit' unless num.is_a?(Numeric) && (1..1000).include?(num)
+    raise "Invalid speedlimit" unless num.is_a?(Numeric) && (1..1000).include?(num)
   end
 
   def validate_state(value)
-    raise 'Invalid state' unless %i[open construction closed traffic].include?(value)
+    raise "Invalid state" unless %i[open construction closed traffic].include?(value)
   end
 end

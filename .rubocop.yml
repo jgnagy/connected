@@ -1,44 +1,55 @@
-AllCops:
-  TargetRubyVersion: 2.6
-
-Metrics/MethodLength:
-  Max: 30
+require:
+- rubocop-rake
+- rubocop-rspec
 
 Layout/LineLength:
   Max: 100
 
-Metrics/ClassLength:
-  Max: 150
-
-Metrics/ModuleLength:
-  Max: 150
-
-Metrics/CyclomaticComplexity:
-  Max: 7
+AllCops:
+  Exclude:
+  - 'db/schema.rb'
+  - 'vendor/**/*'
+  TargetRubyVersion: 3.1
+  NewCops: enable
 
 Metrics/AbcSize:
-  Max: 25
-
-Metrics/PerceivedComplexity:
-  Max: 8
-  Exclude:
-    - 'spec/**/*_spec.rb'
+  Max: 21
 
 Metrics/BlockLength:
   Max: 35
   Exclude:
-    - '*.gemspec'
-    - Rakefile
-    - 'spec/**/*_spec.rb'
-    - 'spec/spec_helper.rb'
+  - 'spec/**/*_spec.rb'
+  - 'Rakefile'
+  - '*.gemspec'
 
-Metrics/ParameterLists:
-  Max: 6
+Metrics/MethodLength:
+  Max: 25
 
-Naming/MethodParameterName:
+Metrics/ModuleLength:
+  Max: 160
   Exclude:
-    - 'spec/**/*.rb'
+  - 'spec/**/*_spec.rb'
 
-Security/Eval:
+Metrics/ClassLength:
+  Max: 300
   Exclude:
-    - Gemfile
+  - 'spec/**/*_spec.rb'
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+  - "bin/console"
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/StringConcatenation:
+  Exclude:
+  - 'Rakefile'
